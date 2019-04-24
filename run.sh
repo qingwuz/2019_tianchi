@@ -1,17 +1,19 @@
 #!/bin/bash
 #
 # run.sh is the entry point of the submission.
-# nvidia-docker run -v ${INPUT_DIR}:/input_images -v ${OUTPUT_DIR}:/output_data
-#       -w /competition ${DOCKER_IMAGE_NAME} sh ./run.sh /input_images /output_data/result.csv
+# nvidia-docker run -v ${INPUT_DIR}:/input_images -v ${OUTPUT_DIR}:/output_images
+#       -w /competition ${DOCKER_IMAGE_NAME} sh ./run.sh /input_images /output_images
 # where:
 #   INPUT_DIR - directory with input png images
-#   OUTPUT_FILE - the classification result for each image
+#   OUTPUT_DIR - directory with output png images
 #
 
 INPUT_DIR=$1
-OUTPUT_FILE=$2
+OUTPUT_DIR=$2
 
-python defense.py \
+python non_attack.py \
   --input_dir="${INPUT_DIR}" \
-  --output_file="${OUTPUT_FILE}" \
-  --checkpoint_path=./models/inception_v1/inception_v1.ckpt
+  --output_dir="${OUTPUT_DIR}" # \
+#  --checkpoint_path1 = ./models/inception_v1/inception_v1.ckpt \
+#  --checkpoint_path2 = ./models/resnet_v1_50/model.ckpt-49800 \
+#  --checkpoint_path3 = ./models/vgg_16/vgg_16.ckpt
