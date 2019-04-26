@@ -60,7 +60,7 @@ model_checkpoint_map = {
 #output_dir = './out_image_nontar/'
 
 max_epsilon = 16.0
-num_iter = 10
+num_iter = 20
 batch_size = 11
 momentum = 1.0
 
@@ -92,20 +92,10 @@ def load_images_with_true_label(input_dir):
     filename2label = {dev.iloc[i]['filename'] : dev.iloc[i]['trueLabel'] for i in range(len(dev))}
     for filename in filename2label.keys():
 
-	# tianjia
-        '''
-	image_pil = array(PIL.Image.open(input_dir + "/" + filename))
-        image2 = zeros(image_pil.shape)
-        for i in range(3):
-            image2[:,:,i] = filters.gaussian_filter(image_pil[:,:,i],1)
-        image = uint8(image2)
-        new_image = PIL.Image.fromarray(image).convert('RGB')
-        images.append(new_image)
-        '''
         image = imread(os.path.join(input_dir, filename), mode='RGB')
 	image2 = zeros(image.shape)
         for i in range(3):
-            image2[:,:,i] = filters.gaussian_filter(image[:,:,i],1)
+            image2[:,:,i] = filters.gaussian_filter(image[:,:,i],1.5)
         image = uint8(image2)
 
         images.append(image)
