@@ -60,7 +60,7 @@ model_checkpoint_map = {
 #output_dir = './out_image_nontar/'
 
 max_epsilon = 16.0
-num_iter = 15
+num_iter = 40
 batch_size = 11
 momentum = 1.0
 
@@ -95,7 +95,7 @@ def load_images_with_true_label(input_dir):
         image = imread(os.path.join(input_dir, filename), mode='RGB')
 	image2 = zeros(image.shape)
         for i in range(3):
-            image2[:,:,i] = filters.gaussian_filter(image[:,:,i],1.5)
+            image2[:,:,i] = filters.gaussian_filter(image[:,:,i],0.5)
         image = uint8(image2)
 
         images.append(image)
